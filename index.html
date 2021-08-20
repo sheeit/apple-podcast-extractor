@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Apple Podcast Extractor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<div id="top"></div>
+
+<h1>
+    Apple Podcast Extractor<br>
+    <small>Find Apple Podcast RSS feed URL</small>
+</h1>
+
+<form action="#">
+    <div>
+        <div>
+            <label for="input">Input</label>
+            <input type="text" id="input" name="input" size="80">
+            <input type="submit" value="Submit">
+        </div>
+        <div>
+            <input type="radio" name="action" id="action-search" value="search" required checked>
+            <label for="action-search">Search (search terms)</label>
+            <br>
+            <input type="radio" name="action" id="action-lookup" value="lookup" required>
+            <label for="action-lookup">Lookup (ID or URL)</label>
+        </div>
+    </div>
+</form>
+
+<div id="nav">
+    <h2 class="d-none">Lookups and searches</h2>
+</div>
+
+<div id="results">
+    <h2 class="d-none">Results</h2>
+</div>
+
+<div>
+    <p class="text-end">
+        <a href="http://validator.w3.org/check?uri=referer">
+            <img src="http://www.w3.org/Icons/valid-html401"
+                 alt="Valid HTML 4.01 Strict"
+                 height="31"
+                 width="88">
+        </a>
+</div>
+
+<script type="text/javascript" src="index.js"></script>
