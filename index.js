@@ -173,7 +173,7 @@ var callbackfunc = (function () {
         podcastida.appendChild(document.createTextNode(
             "id" + result.trackId
         ));
-        podcastida.href = result.trackViewURL;
+        podcastida.href = result.trackViewUrl;
         podcastidp.appendChild(podcastida);
 
         genres.className = "genres";
