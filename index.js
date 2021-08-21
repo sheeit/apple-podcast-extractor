@@ -88,7 +88,6 @@ var callbackfunc = (function () {
 
     function writeTextToClipboard(text) {
         if (navigator && navigator.clipboard) {
-            console.log("Clipboard API supported");
             navigator.clipboard.writeText(text)
             .then(success)
             .catch(failure)
