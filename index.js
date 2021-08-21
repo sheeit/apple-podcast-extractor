@@ -140,7 +140,7 @@ var callbackfunc = (function () {
             image = document.createElement("img"),
             nameh3 = document.createElement("h3"),
             artistp = document.createElement("p"),
-            artista = document.createElement("a"),
+            artista,
             feedp = document.createElement("p"),
             feedspan = document.createElement("span"),
             podcastidp = document.createElement("p"),
@@ -156,9 +156,14 @@ var callbackfunc = (function () {
         nameh3.appendChild(document.createElement("br"));
 
         artistp.className = "podcast-artist";
-        artista.appendChild(document.createTextNode(result.artistName));
-        artista.href = result.artistViewUrl;
-        artistp.appendChild(artista);
+        if (result.artistViewUrl) {
+            artista = document.createElement("a");
+            artista.appendChild(document.createTextNode(result.artistName));
+            artista.href = result.artistViewUrl;
+            artistp.appendChild(artista);
+        } else {
+            artistp.appendChild(document.createTextNode(result.artistName));
+        }
 
         feedspan.className = "podcast-feedurl";
         feedspan.appendChild(document.createTextNode(result.feedUrl));
