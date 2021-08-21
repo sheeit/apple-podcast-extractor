@@ -9,7 +9,7 @@ h1 small {
     font-size: 1.2rem;
 }
 hr {
-    border-color: grey;
+    border-color: gray;
 }
 div#results > div > ul,
 ul.genres {
@@ -23,8 +23,8 @@ ul.genres li {
 }
 li.podcast-li {
     padding: 0.8rem;
-    background-color: lightgrey;
-    box-shadow: 0.2rem 0.1rem 0.3rem lightslategrey;
+    background-color: lightgray;
+    box-shadow: 0.2rem 0.1rem 0.3rem lightslategray;
     border-radius: 0.5rem;
     margin-top: 1rem;
 }
