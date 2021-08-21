@@ -13,8 +13,9 @@ var callbackfunc = (function () {
     function getrss(formdata) {
         var
             action = formdata.get("action"),
-            script = document.getElementById("injected-script"),
+            apiurl,
             podIdRegex = /(?:https?:\/\/podcasts.apple.com\/.*\/id)?(\d+)$/,
+            script = document.getElementById("injected-script"),
             url = formdata.get("input");
 
         lastinput = action + " " + url;
@@ -29,13 +30,13 @@ var callbackfunc = (function () {
 
             url = url[1];
 
-            var apiurl = "https://itunes.apple.com/lookup"
+            apiurl = "https://itunes.apple.com/lookup"
                 + "?id=" + encodeURIComponent(url)
                 + "&entity=podcast"
                 + "&callback=callbackfunc";
 
         } else if (action === "search") {
-            var apiurl = "https://itunes.apple.com/search"
+            apiurl = "https://itunes.apple.com/search"
                 + "?term=" + encodeURIComponent(url).replaceAll("%20", "+")
                 + "&country=US"
 
@@ -57,6 +58,10 @@ var callbackfunc = (function () {
         return true;
     }
 
+    function enableButton(button) {
+        button.removeAttribute("disabled");
+    }
+
     function load(ignored) {
         hiddenTtiles = Array.from(document.getElementsByTagName("h2"));
         navdiv = document.getElementById("nav");
@@ -67,6 +72,8 @@ var callbackfunc = (function () {
             var formdata = new FormData(e.target);
             getrss(formdata);
         });
+
+        enableButton(document.forms[0].elements["submit"]);
     }
 
     function getNavUl() {
@@ -79,13 +86,41 @@ var callbackfunc = (function () {
         return navul;
     }
 
-    function selectOnClick(event) {
-        var
-            selection = window.getSelection(),
-            range = document.createRange();
+    function writeTextToClipboard(text) {
+        if (navigator && navigator.clipboard) {
+            console.log("Clipboard API supported");
+            navigator.clipboard.writeText(text)
+            .then(success)
+            .catch(failure)
+            return;
+        } else {
+            oldMethodCopy();
+        }
 
-        range.selectNode(event.target);
-        selection.addRange(range);
+        function oldMethodCopy() {
+            var ret = document.queryCommandEnabled("copy");
+
+            if (ret) {
+                ret = document.execCommand("copy");
+            }
+
+            return ret;
+        }
+
+        function success() {}
+
+        function failure(error) {
+            console.error(error);
+            oldMethodCopy();
+        }
+    }
+
+    function selectOnClick(event) {
+        writeTextToClipboard((function (target) {
+            var sel = window.getSelection();
+            sel.selectAllChildren(target);
+            return sel.toString();
+        })(event.target));
 
         event.stopPropagation();
         event.preventDefault();
@@ -172,8 +207,6 @@ var callbackfunc = (function () {
     }
 
     function callbackfunc(data) {
-        console.log(data);
-
         var
             navul = getNavUl(),
             navli = document.createElement("li"),

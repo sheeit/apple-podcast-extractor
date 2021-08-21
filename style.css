@@ -56,7 +56,7 @@ li.podcast-li > p {
 }
 span.podcast-feedurl {
     cursor: default;
-    user-select: none;
+    user-select: all;
 }
 a:link,
 span.podcast-feedurl {
